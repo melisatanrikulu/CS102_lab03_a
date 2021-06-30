@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ShapeTester {
@@ -10,6 +9,8 @@ public class ShapeTester {
 		int firstSide;
 		int secondSide;
 		int thirdSide;
+		int xCoordinate;
+		int yCoordinate;
 		
 		final int MENU_EXIT = 0;
 		final int MENU_RECTANGLE = 1;
@@ -17,6 +18,8 @@ public class ShapeTester {
 		final int MENU_SQUARE = 3;
 		final int MENU_TRIANGLE = 4;
 		final int MENU_PRINT_LIST = 5;
+		final int MENU_CONTAINS = 6;
+		final int MENU_REMOVE = 7;
 		
 		
 		do {
@@ -26,6 +29,8 @@ public class ShapeTester {
 			System.out.println( MENU_SQUARE + " - Add Square");
 			System.out.println( MENU_TRIANGLE + " - Add Triangle");
 			System.out.println( MENU_PRINT_LIST + " - Print List");
+			System.out.println( MENU_CONTAINS + " - Find the first selected shape");
+			System.out.println( MENU_REMOVE + " - Unselect all shapes");
 			
 			System.out.println();
 			System.out.print("Selection (" + MENU_EXIT + " to exit): ");
@@ -77,12 +82,33 @@ public class ShapeTester {
 			else if ( selection == MENU_PRINT_LIST )
 				System.out.println(shapes);
 			
+			else if ( selection == MENU_CONTAINS ) {
+				System.out.print("Enter x coordinate: ");
+				xCoordinate = scan.nextInt();
+				System.out.print("Enter y coordinate: ");
+				yCoordinate = scan.nextInt();
+				
+				Shape s;
+				
+				if ( shapes.contains(xCoordinate, yCoordinate) != null ) {	
+					System.out.println(shapes.contains(xCoordinate, yCoordinate));
+					s = shapes.contains(xCoordinate, yCoordinate);
+					s.setSelected(false);
+				}
+			}
+			
+			else if ( selection == MENU_REMOVE ) {
+				shapes.remove();
+			}
+			
 			else if ( selection != MENU_EXIT )
 				System.out.println("Invalid selection! \n");
 
 			
 		}
 		while ( selection != MENU_EXIT );
+		
+		System.out.println( "\nEnd of ShapeTester"); 
 		
 		scan.close();
 	}

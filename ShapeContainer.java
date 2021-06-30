@@ -3,8 +3,6 @@ import java.util.ArrayList;
 public class ShapeContainer {
 	
 	private ArrayList<Shape> shapes;
-	private ArrayList<Double> areas;
-	private ArrayList<Double> perimeters;
 	
 	public ShapeContainer() {
 		shapes = new ArrayList<Shape>();
@@ -24,21 +22,29 @@ public class ShapeContainer {
 	
 	public String toString() {
 		String text;
-		String shapeName;
-		double area;
-		double perimeter;
 		
 		text = "";
 		
-		for ( Shape shape : shapes ) {
-			shapeName = shape.getClass().getName();
-			area = shape.getArea();
-			perimeter = shape.getPerimeter();
-			
-			text += "Shape: " + shapeName + " Area: " + area + " Perimeter: " + perimeter + "\n";
-		}
+		for ( Shape shape : shapes )
+			text += shape.toString();
 		
 		return text;
+	}
+	
+	public Shape contains(int x, int y) {
+		for ( Shape s : shapes ) {
+			if ( s.contains(x, y) == s ) {
+				s.setSelected(true);
+				return s;
+			}
+		}
+		
+		return null;
+	}
+	
+	public void remove() {
+		for ( Shape s : shapes )
+			s.setSelected(false);
 	}
 
 }
